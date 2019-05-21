@@ -290,6 +290,20 @@ end
   end
   ```
 
+* `cpuaffinitiy` - Mapping of vCPUs to host CPUs. [See `vcpupin`](https://libvirt.org/formatdomain.html#elementsCPUTuning).
+
+  ```ruby
+  Vagrant.configure("2") do |config|
+    config.vm.provider :libvirt do |libvirt|
+      libvirt.cpus = 4
+      libvirt.cpuaffinitiy
+        0 => '0-4,^3',
+        1 => '5',
+        2 => '6,8'
+    end
+  end
+  ```
+
 * `nested` - [Enable nested
   virtualization](https://github.com/torvalds/linux/blob/master/Documentation/virtual/kvm/nested-vmx.txt).
   Default is false.

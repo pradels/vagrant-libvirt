@@ -33,6 +33,7 @@ describe 'templates/domain' do
       domain.cpu_feature(name: 'AAA', policy: 'required')
       domain.hyperv_feature(name: 'BBB', state: 'on')
       domain.cputopology(sockets: '1', cores: '3', threads: '2')
+      domain.cpuaffinitiy(0 => '0')
       domain.machine_type = 'pc-compatible'
       domain.machine_arch = 'x86_64'
       domain.loader = '/efi/loader'

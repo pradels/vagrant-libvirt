@@ -35,6 +35,7 @@ module VagrantPlugins
           @cpus = config.cpus.to_i
           @cpu_features = config.cpu_features
           @cpu_topology = config.cpu_topology
+          @cpu_affinity = config.cpu_affinity
           @features = config.features
           @features_hyperv = config.features_hyperv
           @cpu_mode = config.cpu_mode
@@ -195,6 +196,9 @@ module VagrantPlugins
           env[:ui].info(" -- Cpus:              #{@cpus}")
           if not @cpu_topology.empty?
             env[:ui].info(" -- CPU topology:   sockets=#{@cpu_topology[:sockets]}, cores=#{@cpu_topology[:cores]}, threads=#{@cpu_topology[:threads]}")
+          end
+          @cpu_affinity.each do |vcpu, cpuset|
+            env[:ui].info(" -- CPU affinity:   vcpu #{vcpu} => cpuset #{cpuset}")
           end
           @cpu_features.each do |cpu_feature|
             env[:ui].info(" -- CPU Feature:       name=#{cpu_feature[:name]}, policy=#{cpu_feature[:policy]}")
