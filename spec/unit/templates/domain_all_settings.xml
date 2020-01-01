@@ -11,6 +11,10 @@
         <topology sockets='1' cores='3' threads='2'/>
   </cpu>
 
+    <cputune>
+        <vcpupin vcpu="0" cpuset="0" />
+    </cputune>
+
 
   <os>
         <type arch='x86_64' machine='pc-compatible'>hvm</type>

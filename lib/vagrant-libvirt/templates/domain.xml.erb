@@ -33,6 +33,14 @@
     <% end %>
   </cpu>
 
+  <% unless @cpu_affinity.empty? %>
+    <cputune>
+      <% @cpu_affinity.each do |vcpu, cpuset| %>
+        <vcpupin vcpu="<%= vcpu %>" cpuset="<%= cpuset %>" />
+      <% end %>
+    </cputune>
+  <% end %>
+
 <% unless @memory_backing.empty? %>
   <memoryBacking>
   <% @memory_backing.each do |backing| %>

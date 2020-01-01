@@ -77,6 +77,7 @@ module VagrantPlugins
       attr_accessor :cpu_fallback
       attr_accessor :cpu_features
       attr_accessor :cpu_topology
+      attr_accessor :cpu_affinity
       attr_accessor :features
       attr_accessor :features_hyperv
       attr_accessor :numa_nodes
@@ -200,6 +201,7 @@ module VagrantPlugins
         @cpu_fallback      = UNSET_VALUE
         @cpu_features      = UNSET_VALUE
         @cpu_topology      = UNSET_VALUE
+        @cpu_affinity      = UNSET_VALUE
         @features          = UNSET_VALUE
         @features_hyperv   = UNSET_VALUE
         @numa_nodes        = UNSET_VALUE
@@ -370,6 +372,16 @@ module VagrantPlugins
         @cpu_topology[:sockets] = options[:sockets]
         @cpu_topology[:cores] = options[:cores]
         @cpu_topology[:threads] = options[:threads]
+      end
+
+      def cpuaffinitiy(affinity = {})
+        if @cpu_affinity == UNSET_VALUE
+          @cpu_affinity = {}
+        end
+
+        affinity.each do |vcpu, cpuset|
+          @cpu_affinity[vcpu] = cpuset
+        end
       end
 
       def memorybacking(option, config = {})
@@ -678,6 +690,7 @@ module VagrantPlugins
                        @cpu_model
           end
         @cpu_topology = {} if @cpu_topology == UNSET_VALUE
+        @cpu_affinity = {} if @cpu_affinity == UNSET_VALUE
         @cpu_fallback = 'allow' if @cpu_fallback == UNSET_VALUE
         @cpu_features = [] if @cpu_features == UNSET_VALUE
         @features = ['acpi','apic','pae'] if @features == UNSET_VALUE

@@ -10,6 +10,7 @@
   </cpu>
 
 
+
   <os>
         <type>hvm</type>
     <kernel></kernel>
