@@ -347,6 +347,11 @@ end
   set, which should be fine for paravirtualized guests, but some fully
   virtualized guests may require hda. NOTE: this option also applies only to
   disks associated with a box image.
+* `disk_address_type` - The address type of disk device to emulate.
+  Libvirt uses a sensible default if not set, but some fully virtualized guests
+  may need to override this (e.g. Debian on _virt_ machine may need _virtio-mmio_).
+  Possible values are documented in libvirt's [description for
+  _address_](https://libvirt.org/formatdomain.html#elementsAddress).
 * `nic_model_type` - parameter specifies the model of the network adapter when
   you create a domain value by default virtio KVM believe possible values, see
   the [documentation for
@@ -803,6 +808,8 @@ It has a number of options:
 * `size` - Size of the disk image. If unspecified, defaults to 10G.
 * `type` - Type of disk image to create. Defaults to *qcow2*.
 * `bus` - Type of bus to connect device to. Defaults to *virtio*.
+* `address_type` - Address type of disk device to emulate. If unspecified, 
+  Libvirt uses a sensible default.
 * `cache` - Cache mode to use, e.g. `none`, `writeback`, `writethrough` (see
   the [libvirt documentation for possible
   values](http://libvirt.org/formatdomain.html#elementsDisks) or
