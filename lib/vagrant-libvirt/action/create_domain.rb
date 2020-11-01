@@ -51,7 +51,9 @@ module VagrantPlugins
           @machine_type = config.machine_type
           @machine_arch = config.machine_arch
           @disk_bus = config.disk_bus
+          @disk_controller_model = config.disk_controller_model
           @disk_device = config.disk_device
+          @disk_discard = config.disk_discard
           @nested = config.nested
           @memory_size = config.memory.to_i * 1024
           @memory_backing = config.memory_backing

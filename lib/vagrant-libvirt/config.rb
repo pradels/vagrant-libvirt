@@ -92,7 +92,9 @@ module VagrantPlugins
       attr_accessor :machine_arch
       attr_accessor :machine_virtual_size
       attr_accessor :disk_bus
+      attr_accessor :disk_controller_model
       attr_accessor :disk_device
+      attr_accessor :disk_discard
       attr_accessor :nic_model_type
       attr_accessor :nested
       attr_accessor :volume_cache
@@ -222,7 +224,9 @@ module VagrantPlugins
         @machine_arch      = UNSET_VALUE
         @machine_virtual_size = UNSET_VALUE
         @disk_bus          = UNSET_VALUE
+        @disk_controller_model = UNSET_VALUE
         @disk_device       = UNSET_VALUE
+        @disk_discard      = UNSET_VALUE
         @nic_model_type    = UNSET_VALUE
         @nested            = UNSET_VALUE
         @volume_cache      = UNSET_VALUE
@@ -592,11 +596,13 @@ module VagrantPlugins
           type: 'qcow2',
           size: '10G', # matches the fog default
           path: nil,
-          bus: 'virtio'
+          bus: 'virtio',
+          discard: 'ignore'
         }.merge(options)
 
         disk = {
           device: options[:device],
+          discard: options[:discard],
           type: options[:type],
           size: options[:size],
           path: options[:path],
@@ -756,7 +762,9 @@ module VagrantPlugins
         @machine_arch = nil if @machine_arch == UNSET_VALUE
         @machine_virtual_size = nil if @machine_virtual_size == UNSET_VALUE
         @disk_bus = 'virtio' if @disk_bus == UNSET_VALUE
+        @disk_controller_model = 'auto' if @disk_controller_model == UNSET_VALUE
         @disk_device = 'vda' if @disk_device == UNSET_VALUE
+        @disk_discard = 'ignore' if @disk_discard == UNSET_VALUE
         @nic_model_type = nil if @nic_model_type == UNSET_VALUE
         @nested = false if @nested == UNSET_VALUE
         @volume_cache = 'default' if @volume_cache == UNSET_VALUE

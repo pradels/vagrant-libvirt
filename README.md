@@ -343,10 +343,17 @@ end
   _target_](http://libvirt.org/formatdomain.html#elementsDisks). NOTE: this
   option applies only to disks associated with a box image. To set the bus type
   on additional disks, see the [Additional Disks](#additional-disks) section.
+* `disk_controller_model` - the type of disk controller model to use. Possible
+  values are documented in Libvirt's [document for controllers
+  ](https://libvirt.org/formatdomain.html#elementsControllers).
 * `disk_device` - The disk device to emulate. Defaults to vda if not
   set, which should be fine for paravirtualized guests, but some fully
   virtualized guests may require hda. NOTE: this option also applies only to
   disks associated with a box image.
+* `disk_discard` - Whether discard requests are ignored or passed to the
+  filesystem. The valid value are `unmap` and `ignore`. When using `unmap`,
+  `disk_controller_model` should be configured as `virtio-scsi` and `disk_bus`
+  should be configured as `scsi`.
 * `nic_model_type` - parameter specifies the model of the network adapter when
   you create a domain value by default virtio KVM believe possible values, see
   the [documentation for
