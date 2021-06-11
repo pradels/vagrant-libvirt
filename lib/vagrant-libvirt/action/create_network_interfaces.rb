@@ -208,7 +208,8 @@ module VagrantPlugins
                   type: :static,
                   ip: options[:ip],
                   netmask: options[:netmask],
-                  gateway: options[:gateway]
+                  gateway: options[:gateway],
+                  route: options[:route]
                 }.merge(network)
               else
                 network[:type] = :dhcp
